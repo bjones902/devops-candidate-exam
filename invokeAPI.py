@@ -8,8 +8,8 @@ def lambda_handler(event, context):
         'Content-Type': 'application/json'
     }
     try:
-        parsedEvent = json.loads(event['body'])
-        payload = json.dumps(parsedEvent)
+        payload = json.dumps(event)
+        print(event)
         response = requests.post(url, headers=headers,data=payload)
 
         if response.status_code == 200:
