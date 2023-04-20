@@ -14,14 +14,9 @@ def lambda_handler(event, context):
         response = requests.post(url, headers=headers,data=payload)
 
         if response.status_code == 200:
-            responseList = json.loads(response.content)
-            logResult = responseList['LogResult']
-            decodedLogResult = base64.b64decode(logResult)
-            logResultString = decodedLogResult.decode('utf-8')
             return {
-                'statusCode': 200,
-                'body': json.dumps('Request successful'),
-                'LogResultBase64': json.dumps(logResultString)
+                'statusCode': response.status_code,
+                'LogResult': base64.b64decode(response.json()['LogResult']).decode('utf-8')
             }
         else:
             return {
