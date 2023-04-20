@@ -13,4 +13,4 @@ def lambda_handler(event, context):
     connection = http.client.HTTPSConnection(url)
 
     connection.request('POST', '/candidate-email_serverless_lambda_stage/data', payload, headers)
-    response = connection.getresponse()
+    connection.getresponse()
