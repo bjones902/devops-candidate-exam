@@ -26,5 +26,5 @@ resource "aws_lambda_function" "invokeAPI_lambda" {
   function_name = "invokeAPI"
   role          = data.aws_iam_role.lambda.arn
   handler       = "index.test"
-  runtime       = "python3.8"
+  runtime       = "python3.7"
 }
