@@ -26,7 +26,7 @@ resource "aws_security_group" "lambda_sg" {
 
   egress {
     from_port   = 0
-    to_port     = 0    
+    to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -37,6 +37,7 @@ resource "aws_lambda_function" "invokeAPI_lambda" {
   role             = data.aws_iam_role.lambda.arn
   handler          = "invokeAPI.lambda_handler"
   runtime          = "python3.7"
+  timeout          = "30"
   source_code_hash = data.archive_file.lambda.output_base64sha256
 
   vpc_config {
