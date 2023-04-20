@@ -21,7 +21,6 @@ resource "aws_route" "private_nat_gateway" {
   nat_gateway_id         = data.aws_nat_gateway.nat.id
 }
 
-resource "aws_security_group"
 resource "aws_lambda_function" "invokeAPI_lambda" {
   filename      = "inovokeAPI_payload.zip"
   function_name = "invokeAPI"
