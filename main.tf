@@ -10,7 +10,6 @@ resource "aws_route_table" "private" {
 }
 
 resource "aws_route_table_association" "private" {
-  count          = 1
   subnet_id      = aws_subnet.private_subnet.id
   route_table_id = aws_route_table.private.id
 }
@@ -24,11 +23,11 @@ resource "aws_security_group" "lambda_sg" {
   name        = "lambda_sg"
   description = "Security Group for Lambda"
   vpc_id      = data.aws_vpc.vpc.id
-  
+
   egress {
     from_port   = 0
-    to_port     = 65535
-    protocol    = "tcp"
+    to_port     = 0    
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
