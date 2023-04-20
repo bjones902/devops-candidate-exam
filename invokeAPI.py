@@ -7,17 +7,21 @@ def lambda_handler(event, context):
         'X-Siemens-Auth': 'test',
         'Content-Type': 'application/json'
     }
-    payload = json.dumps(event)
-    response = requests.post(url, headers=headers,data=payload)
+    try:
+        parsedEvent = json.loads(event['body'])
+        payload = json.dumps(parsedEvent)
+        response = requests.post(url, headers=headers,data=payload)
 
-    if response.status_code == 200:
-        return {
-            'statusCode': 200,
-            'body': json.dumps('Request successful')
-        }
-    else:
-        return {
-            'statusCode': response.status_code,
-            'body': json.dumps('Request failed with status code: ' + str(response.status_code))
-        }
+        if response.status_code == 200:
+            return {
+                'statusCode': 200,
+                'body': json.dumps('Request successful')
+            }
+        else:
+            return {
+                'statusCode': response.status_code,
+                'body': json.dumps('Request failed with status code: ' + str(response.status_code))
+            }
+    except Exception as e:
+        return e
     
