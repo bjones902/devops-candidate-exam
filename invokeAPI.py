@@ -1,6 +1,5 @@
 import json
 import requests
-import base64
 
 def lambda_handler(event, context):
     url = "https://ij92qpvpma.execute-api.eu-west-1.amazonaws.com/candidate-email_serverless_lambda_stage/data"
@@ -14,9 +13,10 @@ def lambda_handler(event, context):
         response = requests.post(url, headers=headers,data=payload)
 
         if response.status_code == 200:
-            return {
-                'statusCode': response.status_code,
-                'LogResult': base64.b64decode(response.json()['LogResult']).decode('utf-8')
+            return {                
+                'statusCode': 200,
+                'body': json.dumps('Request successful')
+                #'LogResult': base64.b64decode(response.json()['LogResult']).decode('utf-8')
             }
         else:
             return {
