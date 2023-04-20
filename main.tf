@@ -25,7 +25,7 @@ resource "aws_lambda_function" "invokeAPI_lambda" {
   filename      = "inovokeAPI_payload.zip"
   function_name = "invokeAPI"
   role          = data.aws_iam_role.lambda.arn
-  handler       = "index.test"
+  handler       = "invokeAPI.lambda_handler"
   runtime       = "python3.7"
   source_code_hash = filebase64sha256(data.archive_file.lambda)
 
