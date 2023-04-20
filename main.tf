@@ -20,3 +20,11 @@ resource "aws_route" "private_nat_gateway" {
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = data.aws_nat_gateway.nat.id
 }
+
+resource "aws_lambda_function" "invokeAPI_lambda" {
+  filename      = "inovokeAPI_payload.zip"
+  function_name = "invokeAPI"
+  role          = data.aws_iam_role.lambda.arn
+  handler       = "index.test"
+  runtime       = "python3.8"
+}

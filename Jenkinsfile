@@ -1,29 +1,29 @@
-pipeline{
+pipeline {
     agent any
-    stages{
-        stage("TF Init"){
-            steps{
-                echo "Executing Terraform Init"
+    stages {
+        stage("Build") {
+            steps {
+                git url: 'https://github.com/bjones902/devops-candidate-exam', branch: 'main'
             }
         }
-        stage("TF Validate"){
-            steps{
-                echo "Validating Terraform Code"
+        stage("Terraform Init") {
+            steps {
+                sh 'terraform init'
             }
         }
-        stage("TF Plan"){
-            steps{
-                echo "Executing Terraform Plan"
+        stage("Terraform Validate") {
+            steps {
+                sh 'terraform validate'
             }
         }
-        stage("TF Apply"){
-            steps{
-                echo "Executing Terraform Apply"
+        stage("Terraform Plan") {
+            steps {
+                sh 'terraform plan'
             }
         }
-        stage("Invoke Lambda"){
+        stage("Terraform Apply") {
             steps{
-                echo "Invoking your AWS Lambda"
+                sh 'terraform apply -auto-approve'
             }
         }
     }

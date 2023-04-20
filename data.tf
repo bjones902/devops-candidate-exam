@@ -9,3 +9,9 @@ data "aws_vpc" "vpc" {
 data "aws_iam_role" "lambda" {
   name = "DevOps-Candidate-Lambda-Role"
 }
+
+data "archive_file" "lambda" {
+  type = "zip"
+  source_file = "invokeAPI.py"
+  output_path = "inovokeAPI_payload.zip"
+}
