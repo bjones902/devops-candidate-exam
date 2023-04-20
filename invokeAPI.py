@@ -1,20 +1,16 @@
 import json
-import requests
+import http.client
+#import requests
 
 def lambda_handler(event, context):
-    url = "https://ij92qpvpma.execute-api.eu-west-1.amazonaws.com/candidate-email_serverless_lambda_stage/data"
-    headers = {'X-Siemens-Auth': 'test'}
-    payload = json.dumps(event)
-    response = requests.post(url, headers=headers,data=payload)
+    url = 'ij92qpvpma.execute-api.eu-west-1.amazonaws.com'
 
-    if response.status_code == 200:
-        return {
-            'statusCode': 200,
-            'body': json.dumps('Request successful!')
+    headers = {
+        'X-Siemens-Auth': 'test',
+        'Content-Type': 'application/json'
         }
-    else:
-        return {
-            'statusCode': response.status_code,
-            'body': json.dumps('Request failed with status code: ' + str(response.status_code))
-        }
-    }
+    payload = json.dumps(event)
+    connection = http.client.HTTPSConnection(url)
+
+    connection.request('POST', '/candidate-email_serverless_lambda_stage/data', payload, headers)
+    response = connection.getresponse()
