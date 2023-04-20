@@ -20,4 +20,4 @@ def lambda_handler(event, context):
             'statusCode': response.status_code,
             'body': json.dumps('Request failed with status code: ' + str(response.status_code))
         }
-    }
+    
