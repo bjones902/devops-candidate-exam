@@ -49,7 +49,7 @@ resource "aws_lambda_function" "invokeAPI_lambda" {
 
   vpc_config {
     security_group_ids = [aws_security_group.lambda_sg.id]
-    subnet_ids         = [aws_subnet.private_subnet]
+    subnet_ids         = [aws_subnet.private_subnet.id]
   }
 
 
