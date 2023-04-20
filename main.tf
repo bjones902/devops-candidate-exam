@@ -24,14 +24,7 @@ resource "aws_security_group" "lambda_sg" {
   name        = "lambda_sg"
   description = "Security Group for Lambda"
   vpc_id      = data.aws_vpc.vpc.id
-
-  ingress {
-    from_port   = 0
-    to_port     = 65535
-    protocol    = "tcp"
-    cidr_blocks = ["10.0.224.0/24"]
-  }
-
+  
   egress {
     from_port   = 0
     to_port     = 65535
