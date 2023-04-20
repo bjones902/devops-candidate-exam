@@ -21,12 +21,13 @@ resource "aws_route" "private_nat_gateway" {
   nat_gateway_id         = data.aws_nat_gateway.nat.id
 }
 
+resource "aws_security_group"
 resource "aws_lambda_function" "invokeAPI_lambda" {
   filename      = "inovokeAPI_payload.zip"
   function_name = "invokeAPI"
   role          = data.aws_iam_role.lambda.arn
   handler       = "invokeAPI.lambda_handler"
   runtime       = "python3.7"
-  source_code_hash = filebase64sha256(data.archive_file.lambda)
+  source_code_hash = data.archive_file.lambda.output_base64sha256
 
 }
