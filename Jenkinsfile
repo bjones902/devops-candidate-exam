@@ -29,6 +29,7 @@ pipeline {
         stage("Execute Lambda") {
             steps {
                 sh 'aws lambda invoke --function-name invokeAPI --cli-binary-format raw-in-base64-out --log-type Tail --payload \'{ "subnet_id": "subnet-04625301f1d2eee6a", "name": "Brandon Jones", "email": "jones.brandon@siemens.com" }\' response.json'
+                sh 'cat response.json'
             }
         }
     }
